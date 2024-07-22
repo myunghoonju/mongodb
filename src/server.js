@@ -5,9 +5,9 @@ const mongo = require('mongoose')
 
 app.use(express.json())
 
-const URL = 'mongodb+srv://myunghoonju:tWEIhtgybes6sBui@cluster-free.ypct40n.mongodb.net/BlogService?retryWrites=true&w=majority&appName=Cluster-free'
+const URL = 'mongodb+srv://myunghoonju:{password}@cluster-free.ypct40n.mongodb.net/BlogService?retryWrites=true&w=majority&appName=Cluster-free'
 
-const server = async() => {
+const server = async() => { 
     try {
         let connected= await mongo.connect(URL);
         mongo.set('debug', true)
