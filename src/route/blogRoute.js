@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const blogRouter = Router()
-const Blog = require('../models/Blog')
-const User = require('../models/User')
+const { Blog } = require('../models/Blog')
+const { User } = require('../models/User')
 const commentRouter = require('./commentRoute')
 const {isValidObjectId} = require("mongoose");
 
@@ -40,7 +40,7 @@ blogRouter.post('/', async (req, res) => {
 
 blogRouter.get('/', async (req, res) => {
     try {
-        return res.send(await Blog.find());
+        return res.send(await Blog.find({}).limit(10));
     } catch (e) {
         console.error(e)
         res.status(500).send({ err: e.message })

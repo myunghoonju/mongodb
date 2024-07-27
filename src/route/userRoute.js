@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const { User } = require('../models/User')
 const  Router  = require('express');
 const mongo= require("mongoose");
 const userRouter = Router();

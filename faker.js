@@ -1,5 +1,7 @@
 const faker = require("faker");
-const { User, Blog, Comment } = require("./src/models");
+const { User } = require("./src/models/User");
+const { Blog } = require("./src/models/Blog");
+const { Comment } = require("./src/models/Comment");
 
 generateFakeData = async (userCount, blogsPerUser, commentsPerUser) => {
     if (typeof userCount !== "number" || userCount < 1)
