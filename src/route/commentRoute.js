@@ -10,11 +10,13 @@ commentRouter.post('/', async (req, res) => {
         let { content, userId } = req.body
 
         const [user, blog] = await Promise.all([
-            User.findByIdAndUpdate(userId), Blog.findByIdAndUpdate(blogId)
+            User.findById(userId), Blog.findById(blogId)
         ])
 
-        let comment = new Comment({ content, user, blog });
-        await comment.save()
+        let comment = new Comment({ content, user, userFullName: `${user.name.first} ${user.name.last} ` ,blog });
+        await Promise.all([ comment.save(),
+                                   Blog.updateOne( { _id: blogId }, { $push: { comments: comment } } )
+        ])
         return res.send({ comment })
     } catch (e) {
         console.error(e)
