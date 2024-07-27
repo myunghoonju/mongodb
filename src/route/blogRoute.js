@@ -40,7 +40,10 @@ blogRouter.post('/', async (req, res) => {
 
 blogRouter.get('/', async (req, res) => {
     try {
-        return res.send(await Blog.find({}).limit(10));
+        return res.send(await Blog.find({})
+            .limit(50)
+            .populate([ { path: 'user'}, { path: 'comments' } ])
+        );
     } catch (e) {
         console.error(e)
         res.status(500).send({ err: e.message })
