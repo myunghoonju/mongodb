@@ -37,4 +37,16 @@ commentRouter.get('/', async (req, res) => {
 
 })
 
+commentRouter.patch("/:commentId", async(req, res) => {
+    const { commentId } = req.params;
+    const { content } = req.body;
+
+    const [comment, blog] = await Promise.all([
+        Comment.findOneAndUpdate( { _id: commentId }, { content: content }, { new: true } ),
+        Blog.updateOne( { 'comments._id': commentId }, { 'comments.$.content': content } )
+    ])
+
+    return res.send({ comment });
+})
+
 module.exports = commentRouter

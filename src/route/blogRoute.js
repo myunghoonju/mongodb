@@ -41,7 +41,7 @@ blogRouter.post('/', async (req, res) => {
 blogRouter.get('/', async (req, res) => {
     try {
         return res.send(await Blog.find({})
-            .limit(50)
+            .limit(100)
             .populate([ { path: 'user'}, { path: 'comments' } ])
         );
     } catch (e) {
